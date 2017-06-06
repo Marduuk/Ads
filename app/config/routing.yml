@@ -1,0 +1,6 @@
+helpi:
+    resource: "@HelpiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
