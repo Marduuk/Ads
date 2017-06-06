@@ -23,6 +23,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+
         // your own logic
     }
     /**
@@ -264,4 +265,10 @@ class User extends BaseUser
     {
         return $this->numberOfProducts;
     }
+
+    public function setEmail($email){
+        parent::setEmail($email);
+        parent::setUsername($email);
+    }
+
 }
