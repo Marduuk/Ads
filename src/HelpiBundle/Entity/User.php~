@@ -1,0 +1,83 @@
+<?php
+
+
+
+namespace HelpiBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255)
+     */
+    protected $mail;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="coins", type="float")
+     */
+    protected $coins;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="education", type="string", length=255)
+     */
+    protected $education;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="experience", type="string", length=255)
+     */
+    protected $experience;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="string", length=1000)
+     */
+    protected $summary;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nameOfUniversity", type="string", length=255)
+     */
+    protected $nameOfUniversity;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numberOfProducts", type="integer")
+     */
+    protected $numberOfProducts;
+}
