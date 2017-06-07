@@ -148,6 +148,6 @@ class ProductController extends Controller
      * @Route("/mail")
      */
     public function mailAction(){
-
+    //po wyslaniu -X coinow
     }
 }

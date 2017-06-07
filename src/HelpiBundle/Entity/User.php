@@ -7,13 +7,14 @@ namespace HelpiBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @ORM\Id

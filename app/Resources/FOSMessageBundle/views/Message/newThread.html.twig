@@ -1,0 +1,21 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<h2>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>
+
+    {{ dump(form) }}
+
+BANZAI latwiej mi bedzie przeslac tutaj id i zrobic placeholera
+<form action="{{ url('fos_message_thread_new') }}" method="post">
+    <input type="text" id="message_recipient" name="message[recipient]" required="required" value="PPP"/></div>
+
+
+    {{ form_widget(form.subject) }}
+    {{ form_widget(form.body) }}
+    {{ form_widget(form._token) }}
+
+    <input type="submit" />
+</form>
+
+{% endblock %}
