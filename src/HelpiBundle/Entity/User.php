@@ -27,7 +27,8 @@ class User extends BaseUser implements ParticipantInterface
     {
         parent::__construct();
         $this->products = new ArrayCollection();
-    //    $this->numberOfProducts=0;
+        $this->numberOfProducts=0;
+        $this->coins=5;
 
         // your own logic
     }
@@ -98,22 +99,6 @@ class User extends BaseUser implements ParticipantInterface
 
 
     protected $products;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -340,4 +325,6 @@ class User extends BaseUser implements ParticipantInterface
     {
         return $this->products;
     }
+
+
 }

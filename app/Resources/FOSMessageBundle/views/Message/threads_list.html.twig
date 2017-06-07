@@ -1,5 +1,6 @@
 <table>
 
+
     <thead>
         <tr>
             <th>{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
@@ -17,7 +18,8 @@
         {% for thread in threads %}
             <tr>
                 <td>
-                    <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
+                    <a href="{{ url('helpi_message_custom', {'id': thread.id, 'cost': 10}) }}">
+
                         {{ thread.subject }}
                     </a>
 

@@ -3,6 +3,7 @@
 {% block body %}
     <h1>Products list</h1>
 
+    <a href="{{ path('fos_message_inbox') }}">Wiadomosci</a><br><br>
     <table>
         <thead>
             <tr>
@@ -29,8 +30,9 @@
 
                         </li>
                         <li>
-                            <a href="{{ path('helpi_message_custom') }}">napisz do</a>
+                            <a href="{{ path('helpi_message_custom', {'id': product.user.id, 'cost': product.howMuchWorth}) }}">napisz do</a>
                             jak tutaj wsadzic COS
+
                         </li>
                         <li>
                             {% if  product.user.id==id %}

@@ -73,11 +73,12 @@ class ProductController extends Controller
     {
         $deleteForm = $this->createDeleteForm($product);
         $id=$this->getUser()->getId();
-
+// CZEMU NIE PRZESLALEM?
         return $this->render('product/show.html.twig', array(
             'product' => $product,
             'delete_form' => $deleteForm->createView(),
-            'id' => "$id",
+            'id' => "$id"
+
         ));
     }
 
@@ -148,6 +149,6 @@ class ProductController extends Controller
      * @Route("/mail")
      */
     public function mailAction(){
-    //po wyslaniu -X coinow
+
     }
 }

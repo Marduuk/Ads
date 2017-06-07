@@ -4,16 +4,20 @@
 
 <h2>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>
 
-    {{ dump(form) }}
 
-BANZAI latwiej mi bedzie przeslac tutaj id i zrobic placeholera
+
 <form action="{{ url('fos_message_thread_new') }}" method="post">
-    <input type="text" id="message_recipient" name="message[recipient]" required="required" value="PPP"/></div>
+    <input type="text" id="message_recipient" name="message[recipient]"
+           required="required" value="
+                                        {% if username is defined %}
+                                        {{ username }}
+                                        {% endif %}
+                                     "/></div>
 
-
-    {{ form_widget(form.subject) }}
-    {{ form_widget(form.body) }}
-    {{ form_widget(form._token) }}
+    <br>
+    {{ form_widget(form.subject) }}<br>
+    {{ form_widget(form.body) }}<br>
+    {{ form_widget(form._token) }}<br>
 
     <input type="submit" />
 </form>
