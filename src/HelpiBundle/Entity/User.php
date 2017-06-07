@@ -6,6 +6,8 @@ namespace HelpiBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @ORM\Entity
@@ -23,64 +25,97 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->products = new ArrayCollection();
+    //    $this->numberOfProducts=0;
 
         // your own logic
     }
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     protected $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
      */
     protected $mail;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="coins", type="float")
+     * @ORM\Column(name="coins", type="float", nullable=true)
      */
     protected $coins;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="education", type="string", length=255)
+     * @ORM\Column(name="education", type="string", length=255, nullable=true)
      */
     protected $education;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="string", length=255)
+     * @ORM\Column(name="experience", type="string", length=255, nullable=true)
      */
     protected $experience;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="summary", type="string", length=1000)
+     * @ORM\Column(name="summary", type="string", length=1000, nullable=true)
      */
     protected $summary;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nameOfUniversity", type="string", length=255)
+     * @ORM\Column(name="nameOfUniversity", type="string", length=255, nullable=true)
      */
     protected $nameOfUniversity;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="numberOfProducts", type="integer")
+     * @ORM\Column(name="numberOfProducts", type="integer", nullable=true)
      */
     protected $numberOfProducts;
+
+
+
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="user")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+
+
+    protected $products;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Set name
@@ -271,4 +306,37 @@ class User extends BaseUser
         parent::setUsername($email);
     }
 
+
+    /**
+     * Add products
+     *
+     * @param \HelpiBundle\Entity\Product $products
+     * @return User
+     */
+    public function addProduct(\HelpiBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \HelpiBundle\Entity\Product $products
+     */
+    public function removeProduct(\HelpiBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
 }

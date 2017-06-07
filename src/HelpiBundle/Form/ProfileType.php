@@ -13,7 +13,7 @@ class ProfileType extends AbstractType{
             ->add('experience')
             ->add('summary')
             ->add('nameOfUniversity');
-            $builder->remove('password');//czemu nie smiga
+            $builder->remove('password');
 
 
     }
