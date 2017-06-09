@@ -96,9 +96,14 @@ class User extends BaseUser implements ParticipantInterface
      * @ORM\OneToMany(targetEntity="Product", mappedBy="user")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-
-
     protected $products;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Thread", mappedBy="user")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+
+    protected $threads;
 
 
 
@@ -327,4 +332,37 @@ class User extends BaseUser implements ParticipantInterface
     }
 
 
+
+    /**
+     * Add threads
+     *
+     * @param \HelpiBundle\Entity\Thread $threads
+     * @return User
+     */
+    public function addThread(\HelpiBundle\Entity\Thread $threads)
+    {
+        $this->threads[] = $threads;
+
+        return $this;
+    }
+
+    /**
+     * Remove threads
+     *
+     * @param \HelpiBundle\Entity\Thread $threads
+     */
+    public function removeThread(\HelpiBundle\Entity\Thread $threads)
+    {
+        $this->threads->removeElement($threads);
+    }
+
+    /**
+     * Get threads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getThreads()
+    {
+        return $this->threads;
+    }
 }

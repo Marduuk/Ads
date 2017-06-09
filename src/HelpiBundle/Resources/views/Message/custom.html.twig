@@ -3,5 +3,23 @@
 {% block title %}HelpiBundle:Message:custom{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Message:custom page</h1>
+<h1>Welcome to the Message:INBOX page</h1>
+    <a href="{{ path('helpi_message_new') }}">napisz nowa wiadomosc</a><br>
+
+    WYSLANE
+    {% for post in postsSent %}
+        {{ post.text }}
+
+        <br><br>
+    {% endfor %}
+
+
+
+    OTRZYMANE
+    {% for post in postsReceived %}
+        {{ post.text }}
+         <a href="{{ path('helpi_message_reply',{'id':post.id}) }}">odpisz</a><br>
+    {% endfor %}
+
+
 {% endblock %}

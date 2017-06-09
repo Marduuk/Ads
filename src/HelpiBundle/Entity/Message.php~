@@ -225,27 +225,4 @@ class Message
     {
         return $this->product;
     }
-
-    /**
-     * Set thread
-     *
-     * @param \HelpiBundle\Entity\Thread $thread
-     * @return Message
-     */
-    public function setThread(\HelpiBundle\Entity\Thread $thread = null)
-    {
-        $this->thread = $thread;
-
-        return $this;
-    }
-
-    /**
-     * Get thread
-     *
-     * @return \HelpiBundle\Entity\Thread 
-     */
-    public function getThread()
-    {
-        return $this->thread;
-    }
 }

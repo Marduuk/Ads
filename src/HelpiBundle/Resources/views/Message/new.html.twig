@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}HelpiBundle:Message:custom{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Message:NEW page</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

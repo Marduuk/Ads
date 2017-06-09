@@ -3,6 +3,7 @@
 namespace HelpiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Product
@@ -35,10 +36,30 @@ class Product
      */
     private $fieldOfTopic;
 
+    public function __construct() {
+
+        $this->messages = new ArrayCollection();
+
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="product")
+     */
+
+    private $messages;
+
     /**
      * @var float
      *
      * @ORM\Column(name="howMuchWorth", type="float")
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
      */
     private $howMuchWorth;
 
@@ -116,6 +137,7 @@ class Product
      *
      * @param float $howMuchWorth
      * @return Product
+     *
      */
     public function setHowMuchWorth($howMuchWorth)
     {
@@ -182,4 +204,37 @@ class Product
    /* public function getUserId(){
         return $this->getUser()->getId();
     }*/
+
+    /**
+     * Add messages
+     *
+     * @param \HelpiBundle\Entity\Message $messages
+     * @return Product
+     */
+    public function addMessage(\HelpiBundle\Entity\Message $messages)
+    {
+        $this->messages[] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param \HelpiBundle\Entity\Message $messages
+     */
+    public function removeMessage(\HelpiBundle\Entity\Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
 }

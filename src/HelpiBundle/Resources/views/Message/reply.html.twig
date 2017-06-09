@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}HelpiBundle:Message:custom{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Message:NEW page</h1>
+    tutaj reply
+    {{ dump(form) }}
+    {{ form_start(form) }}
+
+    {% if username is defined %}
+        {{ form_widget(form.recId, { 'attr': {'value': username} }) }}<br>
+    {% else %}
+        {{ form_widget(form.recId) }}<br>
+    {% endif %}
+
+    {{ form_widget(form.subject) }}<br>
+    {{ form_widget(form.text) }}<br>
+    {{ form_widget(form.wyslij) }}<br>
+
+
+
+    {{ form_end(form) }}
+
+{% endblock %}
