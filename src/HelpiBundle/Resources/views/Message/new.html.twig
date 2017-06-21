@@ -6,7 +6,16 @@
 <h1>Welcome to the Message:NEW page</h1>
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    Username:<br>
+    {{ form_widget(form.recId) }}
+    <br><br>
+    {{ form_label(form.subject) }}:<br>
+    {{ form_widget(form.subject) }}
+    <br><br>
+    {{ form_label(form.text) }}:<br>
+    {{ form_widget(form.text) }}
+    <br><br>
+    {{ form_widget(form.submit) }}
     {{ form_end(form) }}
 
 {% endblock %}

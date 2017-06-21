@@ -3,6 +3,8 @@
 namespace HelpiBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use HelpiBundle\Entity\Message;
+use HelpiBundle\Entity\User;
 
 /**
  * MessageRepository
@@ -12,4 +14,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class MessageRepository extends EntityRepository
 {
+
+    public function save(Message $message){
+        $this->getEntityManager()->persist($message);
+        $this->getEntityManager()->flush();
+    }
+    /*
+    public function usernameToId($username){
+
+      //  $repoUser = $this->getDoctrine()->getRepository('HelpiBundle:User');
+        $user=$this->findByUsername($username);
+        return $user->getId();
+
+
+    }*/
+
+
 }

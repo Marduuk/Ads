@@ -4,8 +4,9 @@ namespace HelpiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 use HelpiBundle\Entity\Message;
+use HelpiBundle\Entity\User;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,6 +19,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 
 
 use HelpiBundle\Entity\Thread;
+
+
 
 class MessageController extends Controller
 {
@@ -44,41 +47,43 @@ class MessageController extends Controller
      */
 
     public function newAction(Request $req){
-        $post = new Message();
-        $form = $this->createFormBuilder($post)
-            ->add('recId', 'text')
-            ->add('subject',"text")
-            ->add('text','textarea')
-            ->add('wyslij','submit')
-            ->getForm();
+        $message = new Message();
+        $form = $this->createForm('HelpiBundle\Form\MessageType', $message);
 
         $form->handleRequest($req);
-
         if ($form->isSubmitted()) {
-
             $post = $form->getData();
-            $username=$post->getRecId();
-            $repoUser = $this->getDoctrine()->getRepository('HelpiBundle:User');
+            $mail=$post->getRecId();
+            $mailUserGetter=$this->get('helpi_bundle.entity.repository_user');
+            $user=$mailUserGetter->getUserViaMail($mail);
+
             $repoThread = $this->getDoctrine()->getRepository('HelpiBundle:Thread');
-
-            $check=$repoUser->findByUsername("$username");
-            $id=$check[0]->getId();
-
-            $post->setRecId($id);
-            $post->setSendId($this->getUser()->getId());
-
             $em = $this->getDoctrine()->getManager();
+
+            $post->setRecId($user->getId());
+            $post->setSendId($this->getUser()->getId());
+// ustawic id threada? ogolnie odnosnik do threada
             //new thread
-            if(($repoThread->findByCustom($post->getSubject())!==null)){
+            if(false){
+               // $repoThread->findByCustom($post->getSubject()))==null){// i do tego miedzy tymi userami i z data oooo! Datetime i sprawdzamy czy minely od zalozenia 2 dni jezeli tak to cos tam sie dzieje
                 $thread = new Thread();
                 $thread->setCreatedBy($this->getUser());
-                $thread->setCreatedTo($check[0]);
+                $thread->setCreatedTo($user);//!!!
                 $thread->setCustom($post->getSubject());
                 $em->persist($thread);
+                $post->setThread($thread);
             }
-            //custom to temat
+            else{
+                var_dump($post->getSubject());
+                var_dump($repoThread->findByCustom($post->getSubject()));
+                
+die();
+                $post->setThread($repoThread->findByCustom($post->getSubject()));
+            }
 
             $em = $this->getDoctrine()->getManager();
+            var_dump($post);
+            die();
             $em->persist($post);
             $em->flush();
 
@@ -145,10 +150,11 @@ class MessageController extends Controller
 
             $post->setRecId($id);
             $post->setSendId($this->getUser()->getId());
-            var_dump($post);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
+            $em=$this->get('helpi.entity.repository_message');
+            $em->save($post);
+
+
+
             return $this->redirect('/message/inbox');
 
         }

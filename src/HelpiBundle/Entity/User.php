@@ -11,7 +11,8 @@ use FOS\MessageBundle\Model\ParticipantInterface;
 
 
 /**
- * @ORM\Entity
+ * User
+ * @ORM\Entity(repositoryClass="HelpiBundle\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser implements ParticipantInterface

@@ -2,3 +2,24 @@ services:
 #    helpi.example:
 #        class: HelpiBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    helpi.entity.repository_message:
+        class: HelpiBundle\Repository\MessageRepository
+        factory:
+                - "@doctrine.orm.entity_manager"
+                - getRepository
+        arguments:
+                - HelpiBundle\Entity\Message
+
+    helpi_bundle.entity.repository_user:
+        class: HelpiBundle\Repository\UserRepository
+        factory:
+                - "@doctrine.orm.entity_manager"
+                - getRepository
+        arguments:
+                - HelpiBundle\Entity\User
+
+
+
+
+
