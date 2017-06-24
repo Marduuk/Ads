@@ -66,6 +66,10 @@ class MessageController extends Controller
             //new thread
             if(false){
                // $repoThread->findByCustom($post->getSubject()))==null){// i do tego miedzy tymi userami i z data oooo! Datetime i sprawdzamy czy minely od zalozenia 2 dni jezeli tak to cos tam sie dzieje
+                //w do konstruktura thread wsadzic te parametry
+                //a do konstruktora message thread? jezeli nie istnieje taki thread ALBO i teraz uwazaj!
+                // JEZELI OD TERMINU !!!POWSTANIA!!! thread nie minely 2 dni
+                //gdzies musze zwalidowac czy ta wiadomosc nalezy do tego threada
                 $thread = new Thread();
                 $thread->setCreatedBy($this->getUser());
                 $thread->setCreatedTo($user);//!!!
@@ -76,7 +80,7 @@ class MessageController extends Controller
             else{
                 var_dump($post->getSubject());
                 var_dump($repoThread->findByCustom($post->getSubject()));
-                
+
 die();
                 $post->setThread($repoThread->findByCustom($post->getSubject()));
             }
